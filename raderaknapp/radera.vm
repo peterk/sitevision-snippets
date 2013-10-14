@@ -1,0 +1,27 @@
+#set ($utils = $request.getAttribute("sitevision.utils"))
+#set ($ctxUtil = $utils.getPortletContextUtil())
+#set ($permissionUtil = $utils.getPermissionUtil())
+#set ($publishingUtil = $utils.getPublishingUtil())
+#set ($trashUtil = $utils.getTrashcanUtil())
+
+## Var detta en begäran om att avpublicera sidan?
+#set ($action = $request.getParameter('action'))
+
+#if ( $permissionUtil.hasPublishPermission($ctxUtil.getCurrentPage(), $ctxUtil.getCurrentUser()) )
+   #if ($action=='delete')
+
+      ## flytta denna sida/artikel till papperskorgen
+      $trashUtil.moveNodeToTrashcan($ctxUtil.getCurrentPage())
+
+      <p>Sidan har flyttats till papperskorgen</p>
+
+   #else
+
+      ## visa raderaknapp
+      <form method="POST" action="" onsubmit="return confirm('Är du säker på att du vill radera sidan?');">
+      <input type="hidden" id="action" name="action" value="delete">
+      <button type="submit">Radera</button>
+      </form>
+
+   #end
+#end
