@@ -10,10 +10,14 @@
 #if ( $permissionUtil.hasPublishPermission($ctxUtil.getCurrentPage(), $ctxUtil.getCurrentUser()) )
    #if ($action=='delete')
 
-      ## flytta denna sida/artikel till papperskorgen
+      ## Välj ett av alternativen nedan.
+      ## 1. flytta denna sida/artikel till papperskorgen
       $trashUtil.moveNodeToTrashcan($ctxUtil.getCurrentPage())
 
-      <p>Sidan har flyttats till papperskorgen</p>
+      ## 2. avpublicera
+      ##$publishingUtil.unpublishNode($ctxUtil.getCurrentPage())
+
+      <p>Sidan har tagits bort.</p>
 
    #else
 
